@@ -1,12 +1,7 @@
 import pygame
 from rectangle import Bar
 import random
-
-S_WIDTH = 1200
-S_HEIGHT = 600
-
-screen = pygame.display.set_mode((S_WIDTH, S_HEIGHT))
-clock = pygame.time.Clock()
+from constants import *
 
 
 def generateBars(n: int):
@@ -63,8 +58,9 @@ def bubbleSort(bars):
             drawBars(bars)
 
 
-def mergeSort(bars, l, r):
-    if len(bars[l:r]) == 1: return
+def mergeSort(bars, l=0, r=NLOGN):
+    if len(bars[l:r]) == 1:
+        return
 
     m = (l + r) // 2
 
@@ -132,8 +128,9 @@ def pivot(bars, l, r):
     return cPos + 1
 
 
-def quickSort(bars, l, r):
-    if l >= r: return
+def quickSort(bars, l=0, r=NLOGN - 1):
+    if l >= r:
+        return
 
     p = pivot(bars, l, r)
     quickSort(bars, l, p - 1)
@@ -142,7 +139,6 @@ def quickSort(bars, l, r):
 
 
 def bogoSort(bars):
-
     while 1:
         seen = set()
 
@@ -186,32 +182,72 @@ def getBar(n):
 
 
 if __name__ == '__main__':
-    pygame.init()
 
-    nlogn = 600
-    n2 = 100
-    nf = 6
+    known_sorts = {
+        'bogo': (NF, bogoSort),
+        'quick': (NLOGN, quickSort),
+        'merge': (NLOGN, mergeSort),
+        'bubble': (N2, bubbleSort)
+    }
 
-    bars = getBar(nf)
-    bogoSort(bars)
-    assert_correct(bars)
-    pause_screen()
+    blank = ''
 
-    bars = getBar(n2)
-    bubbleSort(bars)
-    assert_correct(bars)
-    pause_screen()
+    while 1:
+        sort_name = input("Name of sort (h for help): ").lower()
 
-    bars = getBar(nlogn)
-    quickSort(bars, 0, nlogn - 1)
-    assert_correct(bars)
-    pause_screen()
+        if sort_name == 'h':
+            print()
+            print()
+            msg = f'Known Sorts:'
+            print(f'{msg:_^50}')
 
-    bars = getBar(nlogn)
-    mergeSort(bars, 0, nlogn)
-    assert_correct(bars)
-    pause_screen()
-    # bubbleSort(bars)
-    #
+            for name in known_sorts:
+                print(name)
 
-    pygame.quit()
+            print()
+            msg = f'Commands:'
+            print(f'{msg:_^50}')
+            print('h: Show list of known sorts and commands')
+            print('q: Exit the program')
+
+            print(f'{blank:_^50}')
+            print()
+
+        elif sort_name == 'q':
+            break
+        else:
+            if sort_name in known_sorts:
+                complexity, func = known_sorts[sort_name]
+
+                screen = pygame.display.set_mode((S_WIDTH, S_HEIGHT))
+                clock = pygame.time.Clock()
+                pygame.init()
+
+                bars = getBar(complexity)
+                func(bars=bars)
+                assert_correct(bars)
+                pause_screen()
+
+                pygame.quit()
+            else:
+                print(f'{sort_name} is not a known sort or command at this moment. Enter h for help')
+
+        # bars = getBar(NF)
+        # bogoSort(bars)
+        # assert_correct(bars)
+        # pause_screen()
+        #
+        # bars = getBar(N2)
+        # bubbleSort(bars)
+        # assert_correct(bars)
+        # pause_screen()
+        #
+        # bars = getBar(NLOGN)
+        # quickSort(bars, 0, NLOGN - 1)
+        # assert_correct(bars)
+        # pause_screen()
+        #
+        # bars = getBar(NLOGN)
+        # mergeSort(bars, 0, NLOGN)
+        # assert_correct(bars)
+        # pause_screen()
