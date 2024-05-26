@@ -2,6 +2,26 @@ import pygame
 from rectangle import Bar
 import random
 from constants import *
+from gui import GUI
+
+
+def pause_screen():
+    display = True
+    while display:
+        keys_pressed = pygame.key.get_pressed()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or keys_pressed[pygame.K_ESCAPE]:
+                display = False
+
+
+def getBar(n):
+    b = generateBars(n)
+
+    drawBars(b)
+
+    pause_screen()
+    return b
 
 
 def generateBars(n: int):
@@ -159,26 +179,8 @@ def bogoSort(bars):
         for i in range(len(bars) - 1):
             if bars[i].h > bars[i + 1].h: done = False
 
-        if done: break
-
-
-def pause_screen():
-    display = True
-    while display:
-        keys_pressed = pygame.key.get_pressed()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT or keys_pressed[pygame.K_ESCAPE]:
-                display = False
-
-
-def getBar(n):
-    b = generateBars(n)
-
-    drawBars(b)
-
-    pause_screen()
-    return b
+        if done:
+            break
 
 
 if __name__ == '__main__':
@@ -190,64 +192,57 @@ if __name__ == '__main__':
         'bubble': (N2, bubbleSort)
     }
 
-    blank = ''
+    clock = pygame.time.Clock()
+    pygame.init()
+    screen = pygame.display.set_mode((S_WIDTH, S_HEIGHT))
+    gui = GUI(screen)
 
+    run = True
+    selected = False
+    help_pressed = False
     while 1:
-        sort_name = input("Name of sort (h for help): ").lower()
+        keys_pressed = pygame.key.get_pressed()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or keys_pressed[pygame.K_ESCAPE]:
+
+                if help_pressed:
+                    selected = False
+                    help_pressed = False
+                    gui.inpoo = ''
+                else:
+                    run = False
+
+            gui.get_key_input(event)
+
+        if not selected:
+            gui.draw()
+            pygame.display.flip()
+            clock.tick(30)
+        elif help_pressed:
+            gui.draw_help(known_sorts)
+            pygame.display.flip()
+            clock.tick(30)
+
+        sort_name = gui.inpoo
 
         if sort_name == 'h':
-            print()
-            print()
-            msg = f'Known Sorts:'
-            print(f'{msg:_^50}')
+            help_pressed = True
+            selected = True
+        elif sort_name in known_sorts:
+            selected = True
 
-            for name in known_sorts:
-                print(name)
-
-            print()
-            msg = f'Commands:'
-            print(f'{msg:_^50}')
-            print('h: Show list of known sorts and commands')
-            print('q: Exit the program')
-
-            print(f'{blank:_^50}')
-            print()
-
-        elif sort_name == 'q':
+        if not run:
             break
-        else:
+
+        if selected and not help_pressed:
             if sort_name in known_sorts:
                 complexity, func = known_sorts[sort_name]
-
-                screen = pygame.display.set_mode((S_WIDTH, S_HEIGHT))
-                clock = pygame.time.Clock()
-                pygame.init()
 
                 bars = getBar(complexity)
                 func(bars=bars)
                 assert_correct(bars)
                 pause_screen()
 
-                pygame.quit()
-            else:
-                print(f'{sort_name} is not a known sort or command at this moment. Enter h for help')
-
-        # bars = getBar(NF)
-        # bogoSort(bars)
-        # assert_correct(bars)
-        # pause_screen()
-        #
-        # bars = getBar(N2)
-        # bubbleSort(bars)
-        # assert_correct(bars)
-        # pause_screen()
-        #
-        # bars = getBar(NLOGN)
-        # quickSort(bars, 0, NLOGN - 1)
-        # assert_correct(bars)
-        # pause_screen()
-        #
-        # bars = getBar(NLOGN)
-        # mergeSort(bars, 0, NLOGN)
-        # assert_correct(bars)
-        # pause_screen()
+                gui.inpoo = ''
+                selected = False
+    pygame.quit()
