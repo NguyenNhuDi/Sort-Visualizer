@@ -1,5 +1,4 @@
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
+global_s_width = 1200
+global_s_height = 600
 
-S_WIDTH = 1200
-S_HEIGHT = 600
+global_n = 0
