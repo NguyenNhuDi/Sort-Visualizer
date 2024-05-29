@@ -22,9 +22,14 @@ if __name__ == '__main__':
                              'must be a divisor of screen width)')
     parser.add_argument('-s', '--sort_name', required=False, default='bogo', help='Sorting algorithm to visualize')
 
-    parser.add_argument('--width', required=False, type=int, default=constants.global_s_width)
-    parser.add_argument('--height', required=False, type=int, default=constants.global_s_height)
-    parser.add_argument('--ls', action='store_true', default=False)
+    parser.add_argument('-width', required=False, type=int, default=constants.global_s_width,
+                        help='Set the width of the screen')
+
+    parser.add_argument('-height', required=False, type=int, default=constants.global_s_height,
+                        help='Set the height of the screen')
+
+    parser.add_argument('-ls', action='store_true', default=False,
+                        help='List all known sorts')
 
     args = parser.parse_args()
 
