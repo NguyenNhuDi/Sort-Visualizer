@@ -16,12 +16,14 @@ def pause_screen():
 
 
 def generateBars(n: int):
+    print(n)
     width = int(constants.global_s_width / n)
     out = []
-    for i in range(0, constants.global_s_height, width):
+    for i in range(0, constants.global_s_width, width):
         value = random.randint(1, constants.global_s_height)
         temp = Bar(i, constants.global_s_height - value, width, value)
         out.append(temp)
+
 
     return out
 

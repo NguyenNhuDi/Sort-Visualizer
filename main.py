@@ -74,6 +74,8 @@ if __name__ == '__main__':
     func = known_sorts[sort_name]
     bars = getBar(complexity, screen, clock)
 
+    print(len(bars))
+
     func(bars=bars, s=screen, c=clock)
     assert_correct(bars, screen, clock)
     pause_screen()

@@ -18,7 +18,14 @@ def pivot(bars, l, r, s, c):
     return cPos + 1
 
 
-def quickSort(bars, s, c, l=0, r=constants.global_n - 1):
+def quickSort(bars, s, c, l=None, r=None):
+
+    if l is None:
+        l = 0
+
+    if r is None:
+        r = constants.global_n - 1
+
     if l >= r:
         return
 
