@@ -2,6 +2,7 @@ import pygame
 from rectangle import Bar
 import random
 import constants
+import time
 
 
 def pause_screen():
@@ -16,14 +17,11 @@ def pause_screen():
 
 def generateBars(n: int):
     width = int(constants.global_s_width / n)
-
     out = []
-    for i in range(0, constants.global_s_width, width):
+    for i in range(0, constants.global_s_height, width):
         value = random.randint(1, constants.global_s_height)
         temp = Bar(i, constants.global_s_height - value, width, value)
         out.append(temp)
-
-    assert len(out) == n, f'{len(out)} != {n}'
 
     return out
 
@@ -31,8 +29,8 @@ def generateBars(n: int):
 def drawBars(bars, s, c):
     width = int(constants.global_s_width / len(bars))
     for i, b in enumerate(bars):
-        s.fill((0, 0, 0), (b.x, 0, b.w, constants.global_s_height))
         b.x = i * width
+        s.fill((0, 0, 0), (b.x, 0, b.w, constants.global_s_height))
         b.render(s)
     pygame.display.flip()
     c.tick(960)
@@ -40,9 +38,7 @@ def drawBars(bars, s, c):
 
 def getBar(n, s, c):
     b = generateBars(n)
-
     drawBars(b, s, c)
-
     pause_screen()
     return b
 

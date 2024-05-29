@@ -1,4 +1,3 @@
-import pygame
 import argparse
 from utils import *
 from sys import exit
@@ -6,6 +5,7 @@ from bog_sort import *
 from bubble_sort import *
 from merge_sort import *
 from quick_sort import *
+from radix_sort import *
 import constants
 
 if __name__ == '__main__':
@@ -32,18 +32,31 @@ if __name__ == '__main__':
         'bogo': bogoSort,
         'bubble': bubbleSort,
         'merge': mergeSort,
-        'quick': quickSort
+        'quick': quickSort,
+        'radix': radixSort
     }
 
     if args.ls:
+        print()
+        print()
+        print()
+
+        msg = f'KNOWN SORTS'
+        print(f'{msg:_^50}')
+
         for name in known_sorts:
             print(name)
+        msg = f''
+        print(f'{msg:_^50}')
+        print()
+        print()
+        print()
         exit(0)
 
     s_width = args.width
     s_height = args.height
 
-    sort_name = args.sort_name
+    sort_name = args.sort_name.lower()
     complexity = args.elements
 
     constants.global_n = complexity

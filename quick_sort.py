@@ -1,4 +1,4 @@
-from constants import global_n
+import constants
 from utils import drawBars
 
 
@@ -18,7 +18,7 @@ def pivot(bars, l, r, s, c):
     return cPos + 1
 
 
-def quickSort(bars, s, c, l=0, r=global_n - 1):
+def quickSort(bars, s, c, l=0, r=constants.global_n - 1):
     if l >= r:
         return
 
