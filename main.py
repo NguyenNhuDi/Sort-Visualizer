@@ -3,7 +3,7 @@ from utils import *
 from sys import exit
 from bogo_sort import *
 from bubble_sort import *
-from insertion_sort import *
+from selection import *
 from merge_sort import *
 from quick_sort import *
 from radix_sort import *
@@ -13,10 +13,10 @@ if __name__ == '__main__':
     known_sorts = {
         'bogo': bogoSort,
         'bubble': bubbleSort,
-        'insertion': insertionSort,
         'merge': mergeSort,
         'quick': quickSort,
-        'radix': radixSort
+        'radix': radixSort,
+        'selection': selectionSort
     }
 
     parser = argparse.ArgumentParser(

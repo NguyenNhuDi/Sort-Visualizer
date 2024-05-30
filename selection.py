@@ -2,7 +2,8 @@ from utils import drawBars
 from utils import drawCurrentBar
 from utils import drawBar
 
-def insertionSort(bars, s, c):
+
+def selectionSort(bars, s, c):
     for i in range(len(bars)):
         mini = 0xffffffff
         mIndex = -1
@@ -11,7 +12,7 @@ def insertionSort(bars, s, c):
                 mini = bars[j].h
                 mIndex = j
 
-            drawBar(bars[j-1], s, c)
+            drawBar(bars[j - 1], s, c)
             drawCurrentBar(bars[j], s, c)
 
         bars[i], bars[mIndex] = bars[mIndex], bars[i]
