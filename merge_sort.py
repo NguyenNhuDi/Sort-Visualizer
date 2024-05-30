@@ -1,9 +1,9 @@
 import constants
 from utils import drawBars
+from utils import drawCurrentBar
 
 
 def mergeSort(bars, s, c, l=None, r=None):
-
     if r is None:
         r = constants.global_n
 
@@ -23,7 +23,6 @@ def mergeSort(bars, s, c, l=None, r=None):
 
 
 def merge(l, r, m, bars, bI, s, c):
-
     # print(l,m,r, len(bars))
 
     lArr = [(bars[i], i) for i in range(l, m)]
@@ -43,22 +42,26 @@ def merge(l, r, m, bars, bI, s, c):
             bars[bI] = value
             rI += 1
 
-        # out.append(bars[index])
-        bI += 1
         drawBars(bars, s, c)
+        drawCurrentBar(bars[bI], s, c)
+        bI += 1
 
     while lI < len(lArr):
         value, index = lArr[lI]
         lI += 1
         bars[bI] = value
-        # out.append(bars[index])
-        bI += 1
+
         drawBars(bars, s, c)
+        drawCurrentBar(bars[bI], s, c)
+
+        bI += 1
 
     while rI < len(rArr):
         value, index = rArr[rI]
         rI += 1
         bars[bI] = value
-        # out.append(bars[index])
-        bI += 1
+
         drawBars(bars, s, c)
+        drawCurrentBar(bars[bI], s, c)
+
+        bI += 1

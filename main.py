@@ -1,7 +1,7 @@
 import argparse
 from utils import *
 from sys import exit
-from bog_sort import *
+from bogo_sort import *
 from bubble_sort import *
 from merge_sort import *
 from quick_sort import *

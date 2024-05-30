@@ -1,5 +1,5 @@
 from utils import drawBars
-
+from utils import drawCurrentBar
 
 def radixSort(bars, s, c):
     num_to_pos = {}
@@ -41,6 +41,7 @@ def radixSort(bars, s, c):
 
                 bars[curr_index], bars[ptr] = bars[ptr], bars[curr_index]
                 drawBars(bars, s, c)
+                drawCurrentBar(bars[ptr], s, c)
 
                 num_to_pos[curr_num] = ptr
                 num_to_pos[swap_num] = curr_index

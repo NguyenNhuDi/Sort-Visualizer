@@ -1,4 +1,5 @@
 from utils import drawBars
+from utils import drawCurrentBar
 
 
 def bubbleSort(bars, s, c):
@@ -11,3 +12,4 @@ def bubbleSort(bars, s, c):
                 bars[j], bars[j + 1] = bars[j + 1], bars[j]
 
             drawBars(bars, s, c)
+            drawCurrentBar(bars[j], s, c)

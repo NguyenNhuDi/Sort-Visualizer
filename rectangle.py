@@ -1,5 +1,5 @@
 import pygame
-
+import constants
 
 class Bar(pygame.sprite.Sprite):
     def __init__(self, x: int, y: int, w: int, h: int):
@@ -16,6 +16,11 @@ class Bar(pygame.sprite.Sprite):
     def render(self, screen: pygame.surface.Surface):
         self.image = pygame.Surface((self.w, self.h))
         self.image.fill(color=(255, 255, 255))
+        screen.blit(self.image, (self.x, self.y))
+
+    def render_red(self, screen: pygame.surface.Surface):
+        self.image = pygame.Surface((self.w, self.h))
+        self.image.fill(color=(255, 0, 0))
         screen.blit(self.image, (self.x, self.y))
 
     def render_correct(self, screen: pygame.surface.Surface):

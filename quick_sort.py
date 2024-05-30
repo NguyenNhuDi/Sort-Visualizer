@@ -1,6 +1,6 @@
 import constants
 from utils import drawBars
-
+from utils import drawCurrentBar
 
 def pivot(bars, l, r, s, c):
     p = bars[r].h
@@ -11,6 +11,7 @@ def pivot(bars, l, r, s, c):
             cPos += 1
             bars[i], bars[cPos] = bars[cPos], bars[i]
             drawBars(bars, s, c)
+            drawCurrentBar(bars[i], s, c)
 
     bars[cPos + 1], bars[r] = bars[r], bars[cPos + 1]
     drawBars(bars, s, c)
