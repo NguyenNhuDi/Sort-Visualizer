@@ -1,5 +1,5 @@
 import pygame
-import constants
+
 
 class Bar(pygame.sprite.Sprite):
     def __init__(self, x: int, y: int, w: int, h: int):

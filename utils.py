@@ -15,7 +15,6 @@ def pause_screen():
 
 
 def generateBars(n: int):
-    print(n)
     width = int(constants.global_s_width / n)
     out = []
     for i in range(0, constants.global_s_width, width):
@@ -32,6 +31,12 @@ def drawBars(bars, s, c):
         b.x = i * width
         s.fill((0, 0, 0), (b.x, 0, b.w, constants.global_s_height))
         b.render(s)
+    pygame.display.flip()
+    c.tick(960)
+
+
+def drawBar(bar, s, c):
+    bar.render(s)
     pygame.display.flip()
     c.tick(960)
 

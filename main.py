@@ -3,12 +3,21 @@ from utils import *
 from sys import exit
 from bogo_sort import *
 from bubble_sort import *
+from insertion_sort import *
 from merge_sort import *
 from quick_sort import *
 from radix_sort import *
 import constants
 
 if __name__ == '__main__':
+    known_sorts = {
+        'bogo': bogoSort,
+        'bubble': bubbleSort,
+        'insertion': insertionSort,
+        'merge': mergeSort,
+        'quick': quickSort,
+        'radix': radixSort
+    }
 
     parser = argparse.ArgumentParser(
         prog='Sort Visualizer',
@@ -32,14 +41,6 @@ if __name__ == '__main__':
                         help='List all known sorts')
 
     args = parser.parse_args()
-
-    known_sorts = {
-        'bogo': bogoSort,
-        'bubble': bubbleSort,
-        'merge': mergeSort,
-        'quick': quickSort,
-        'radix': radixSort
-    }
 
     if args.ls:
         print()
@@ -78,8 +79,6 @@ if __name__ == '__main__':
 
     func = known_sorts[sort_name]
     bars = getBar(complexity, screen, clock)
-
-    print(len(bars))
 
     func(bars=bars, s=screen, c=clock)
     assert_correct(bars, screen, clock)
