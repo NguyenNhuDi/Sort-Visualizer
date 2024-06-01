@@ -2,6 +2,7 @@ import constants
 from utils import drawBars
 from utils import drawCurrentBar
 
+
 def pivot(bars, l, r, s, c):
     p = bars[r].h
 
@@ -20,7 +21,6 @@ def pivot(bars, l, r, s, c):
 
 
 def quickSort(bars, s, c, l=None, r=None):
-
     if l is None:
         l = 0
 
