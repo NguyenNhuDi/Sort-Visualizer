@@ -1,6 +1,7 @@
 from utils import drawBars
 from utils import drawCurrentBar
 
+
 def radixSort(bars, s, c):
     num_to_pos = {}
     pos_to_num = {}

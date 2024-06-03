@@ -26,9 +26,10 @@ def generateBars(n: int):
 
 
 def drawBars(bars, s, c):
-    width = int(constants.global_s_width / len(bars))
+    width = constants.global_s_width / len(bars)
     for i, b in enumerate(bars):
         b.x = i * width
+        b.w = width
         s.fill((0, 0, 0), (b.x, 0, b.w, constants.global_s_height))
         b.render(s)
     pygame.display.flip()

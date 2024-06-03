@@ -7,8 +7,8 @@ from insertion_sort import *
 from merge_sort import *
 from quick_sort import *
 from radix_sort import *
-from selection import *
-
+from selection_sort import *
+from stalin_sort import *
 import constants
 
 if __name__ == '__main__':
@@ -19,7 +19,8 @@ if __name__ == '__main__':
         'merge': mergeSort,
         'quick': quickSort,
         'radix': radixSort,
-        'selection': selectionSort
+        'selection': selectionSort,
+        'stalin': stalinSort
     }
 
     parser = argparse.ArgumentParser(
